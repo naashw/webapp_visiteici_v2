@@ -7,7 +7,7 @@
         :src="annonceProp.photos.split(',')[0]"
         loading="lazy"
         class="h-full w-full md:w-1/3 object-cover rounded-lg rounded-r-none pb-5/6"
-        alt="bag"
+        alt="image de l'annonce"
       />
       <div
         class="flex flex-col justify-items-stretch w-full md:w-2/3 px-4 py-4 bg-white rounded-lg"

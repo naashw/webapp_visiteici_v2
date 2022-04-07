@@ -3,6 +3,7 @@
     <NavBar />
 
     <SearchAnnonces />
+    <AnnoncesColumnCards />
     
     <h1>Hello Nuxters! 👋</h1>
     <p>
