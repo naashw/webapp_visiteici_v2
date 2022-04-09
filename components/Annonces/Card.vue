@@ -1,5 +1,5 @@
 <template>
-  <div v-if="annonceProp" class="card card-compact w-full h-full  shadow-xl">
+  <div v-if="annonceProp" class="card card-compact w-full h-full shadow-xl">
     <figure>
       <img
         :src="annonceProp.photos.split(',')[0]"
@@ -10,9 +10,7 @@
     <div class="card-body">
       <h2 class="card-title text-base group-hover:text-warning">{{ annonceProp.nom }}</h2>
       <div class="pt-4 mt-auto">
-        <p class="text-sm">
-          {{ annonceProp.ville }} {{ annonceProp.code_postal }}
-        </p>
+        <p class="text-sm">{{ annonceProp.ville }} {{ annonceProp.code_postal }}</p>
       </div>
     </div>
   </div>
@@ -25,4 +23,3 @@ export default {
   },
 };
 </script>
-

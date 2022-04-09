@@ -1,17 +1,11 @@
 <template>
-  <div class="flex items-stretch justify-center w-3/4 mx-auto bg-base-200">
-    <div
-      v-if="annonces"
-      v-for="(annonce, index) in annonces"
-      :key="annonce.id"
-      class="mx-2 my-4 w-1/6"
-    >
+  <div
+    class="flex items-stretch justify-center w-3/4 mx-auto bg-base-200"
+    v-if="annonces"
+  >
+    <div v-for="(annonce, index) in annonces" :key="annonce.id" class="mx-2 my-4 w-1/6">
       <NuxtLink :to="`/annonces/${annonce.id}`" class="bg-base-100">
-        <LazyAnnoncesCard
-          v-if="annonce"
-          :annonceProp="annonce"
-          class="group"
-        />
+        <LazyAnnoncesCard v-if="annonce" :annonceProp="annonce" class="group" />
       </NuxtLink>
     </div>
   </div>

@@ -1,7 +1,6 @@
 <template>
-  <div class="">
-    <!-- item card -->
-    <div v-if="annonces" v-for="(annonce, index) in annonces" :key="annonce.id">
+  <div v-if="annonces">
+    <div v-for="(annonce, index) in annonces" :key="annonce.id">
       <NuxtLink
         :to="`/annonces/${annonce.id}`"
         tag="a"

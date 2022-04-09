@@ -1,7 +1,6 @@
 <template>
   <div class="bg-base-200 h-screen">
     <NavBar />
-
     <SearchAnnonces />
     <AnnoncesColumnCards />
     

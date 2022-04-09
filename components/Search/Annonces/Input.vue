@@ -42,7 +42,7 @@ export default {
   
   data() {
     return {
-      inputText: this.inputText,
+      inputText: this.$route.query.text || "",
     };
   },
 };

@@ -40,18 +40,47 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
 
     '@nuxt/http',
     '@nuxtjs/proxy'
   ],
 
+  //middleware d'authentification à activer pour mettre l'authentification sur toutes les pages par defaut
+  router: {
+    // middleware: ['auth']
+  },
+
+  //Strategies d'authentification à laravelSactum
+  auth: {
+    strategies: {
+
+      laravelSanctum: {
+        provider: 'laravel/sanctum',
+        url: process.env.API_URL,
+        cookie: {
+          // (optional) If set, we check this cookie existence for loggedIn check
+          name: 'XSRF-TOKEN',
+        },
+        user: {
+          property: '',
+        },
+        endpoints: {
+          login: { url: '/login', method: 'post', },
+          logout: { url: '/logout', method: 'post', },
+          user: { url: '/api/user', method: 'get', propertyName: 'user' },
+        }
+      },
+    }
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
 
   axios: {
 
     baseURL: process.env.API_URL,
+    credentials: true,
     proxy: false,
-    retry: { retires: 3 },
+    //retry: { retires: 3 },
   },
 
   http: {
@@ -61,7 +90,7 @@ export default {
 
   proxy: [
     // Proxies /foo to http://example.com/foo
-    process.env.API_URL + '/*',
+    // process.env.BASE_URL + '/*',
 
   ],
 

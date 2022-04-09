@@ -6,9 +6,6 @@
       >
     </div>
     <div class="flex-none gap-2">
-      <div class="form-control">
-        <input type="text" placeholder="Search" class="input input-bordered" />
-      </div>
       <div class="dropdown dropdown-end">
         <label tabindex="0" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
@@ -19,16 +16,45 @@
           tabindex="0"
           class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
         >
-          <li>
-            <a class="justify-between">
+          <li v-if="this.$auth.loggedIn">
+            <a @click="isloggin" class="justify-between">
               Profile
               <span class="badge">New</span>
             </a>
           </li>
-          <li><a>Settings</a></li>
-          <li><a>Logout</a></li>
+          <li v-if="this.$auth.loggedIn"><a>Settings</a></li>
+          <li v-if="this.$auth.loggedIn"><a @click="logout">Logout</a></li>
+          <li v-if="!this.$auth.loggedIn"><a @click="login">Login</a></li>
         </ul>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    async logout() {
+      if (this.$auth.loggedIn) {
+        await this.$auth.logout();
+      }
+    },
+    async login() {
+      if (!this.$auth.loggedIn) {
+        let response = await this.$auth.loginWith("laravelSanctum", {
+          data: {
+            email: "test1@naashw.fr",
+            password: "test1234",
+          },
+        });
+      }
+    },
+    isloggin() {
+      console.log("is loggin ? " + this.$auth.loggedIn);
+      if (this.$auth.loggedIn) {
+        console.log(JSON.stringify(this.$auth.user));
+      }
+    },
+  },
+};
+</script>
