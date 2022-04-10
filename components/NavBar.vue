@@ -24,10 +24,14 @@
           </li>
           <li v-if="this.$auth.loggedIn"><a>Settings</a></li>
           <li v-if="this.$auth.loggedIn"><a @click="logout">Logout</a></li>
-          <li v-if="!this.$auth.loggedIn"><a @click="login">Login</a></li>
+          <li v-if="!this.$auth.loggedIn">
+            <label for="my-modal-4" class="">Connexion</label>
+          </li>
         </ul>
       </div>
     </div>
+
+    <LoginModal />
   </div>
 </template>
 
@@ -39,16 +43,7 @@ export default {
         await this.$auth.logout();
       }
     },
-    async login() {
-      if (!this.$auth.loggedIn) {
-        let response = await this.$auth.loginWith("laravelSanctum", {
-          data: {
-            email: "test1@naashw.fr",
-            password: "test1234",
-          },
-        });
-      }
-    },
+
     isloggin() {
       console.log("is loggin ? " + this.$auth.loggedIn);
       if (this.$auth.loggedIn) {
