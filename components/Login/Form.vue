@@ -10,8 +10,12 @@
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="text"
+            v-bind:class="{ 'border-error': errors.email }"
             v-model="login.email"
           />
+          <p v-if="errors.email" class="text-error text-sm italic">
+            {{ this.errors.email[0] }}
+          </p>
         </div>
         <div class="mb-6">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
@@ -21,9 +25,14 @@
             class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
+            v-bind:class="{ 'border-error': errors.password }"
             v-model="login.password"
             placeholder="**********"
           />
+
+          <p v-if="errors.password" class="text-error text-sm italic">
+            {{ this.errors.password[0] }}
+          </p>
         </div>
         <div class="flex items-center justify-between">
           <button
@@ -54,6 +63,11 @@ export default {
         email: undefined,
         password: undefined,
       },
+      errors: {
+        message: undefined,
+        email: undefined,
+        password: undefined,
+      },
     };
   },
   methods: {
@@ -64,7 +78,11 @@ export default {
             data: this.login,
           });
         } catch (err) {
-          console.log(err);
+          this.errors = {
+            message: err.response.data.message,
+            email: err.response.data.errors.email,
+            password: err.response.data.errors.password,
+          };
         }
       }
     },
