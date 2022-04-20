@@ -1,9 +1,8 @@
 <template>
-  <div class="bg-base-200 h-screen">
-    <NavBar />
+  <div>
     <SearchAnnonces />
     <AnnoncesColumnCards />
-    
+
     <h1>Hello Nuxters! 👋</h1>
     <p>
       This page is rendered on the <strong>{{ rendering }}</strong>
@@ -24,8 +23,8 @@
 export default {
   asyncData() {
     return {
-      rendering: process.server ? 'server' : 'client'
-    }
-  }
-}
+      rendering: process.server ? "server" : "client",
+    };
+  },
+};
 </script>

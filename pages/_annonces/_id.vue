@@ -8,7 +8,7 @@ export default {
   async asyncData({ params, $axios }) {
     // fetch annonces in api url with axios
     const annonce = await $axios
-      .get(`https://api.visiteici.fr/api/annonces/${params.id}`)
+      .get(`/api/annonces/${params.id}`)
       .then((res) => res.data);
 
     return { annonce };

@@ -26,17 +26,11 @@ export default {
 
   async fetch() {
     // assign url for cors error
-    const apiUrl = process.env.API_URL;
     const queryText = this.$route.query.text ? "?text=" + this.$route.query.text : "";
-    // fetch annonces in api url
-    /* this.annonces = await fetch("https://api.visiteici.fr/api/annonces").then((res) =>
-      res.json()
-    ); */
+    const apiUrl = "/api/annonces" + queryText;
 
     // fetch annonces in api url with axios
-    this.annonces = await this.$axios
-      .get("https://api.visiteici.fr/api/annonces" + queryText)
-      .then((res) => res.data);
+    this.annonces = await this.$axios.get(apiUrl).then((res) => res.data);
   },
 };
 </script>
