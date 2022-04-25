@@ -15,6 +15,9 @@
         <option value="1">Appartements</option>
         <option value="2">Maison</option>
       </select>
+      <p v-if="errors.categories" class="text-error text-sm italic">
+          {{ this.errors.categories[0] }}
+        </p>
 
       <label class="label">
         <span class="label-text">Titre de votre annonce</span>
@@ -25,6 +28,9 @@
         placeholder="Type here"
         class="input input-bordered w-full max-w-xs"
       />
+      <p v-if="errors.nom" class="text-error text-sm italic">
+          {{ this.errors.nom[0] }}
+        </p>
 
       <div class="form-control">
         <label class="label">
@@ -35,6 +41,9 @@
           class="textarea textarea-bordered h-24"
           placeholder="Bio"
         ></textarea>
+        <p v-if="errors.description" class="text-error text-sm italic">
+          {{ this.errors.description[0] }}
+        </p>
       </div>
 
       <label class="label">
@@ -46,6 +55,9 @@
         placeholder="Type here"
         class="input input-bordered w-full max-w-xs"
       />
+      <p v-if="errors.code_postal" class="text-error text-sm italic">
+          {{ this.errors.code_postal[0] }}
+        </p>
 
       <label class="label">
         <span class="label-text">Ville</span>
@@ -56,6 +68,9 @@
         placeholder="Type here"
         class="input input-bordered w-full max-w-xs"
       />
+      <p v-if="errors.ville" class="text-error text-sm italic">
+          {{ this.errors.ville[0] }}
+        </p>
 
       <label class="label">
         <span class="label-text">Adresse</span>
@@ -66,6 +81,9 @@
         placeholder="Type here"
         class="input input-bordered w-full max-w-xs"
       />
+      <p v-if="errors.adresse" class="text-error text-sm italic">
+          {{ this.errors.adresse[0] }}
+        </p>
       <div>
         <label class="label">
           <span class="label-text">Prix</span>
@@ -76,6 +94,9 @@
           placeholder="Type here"
           class="input input-bordered w-full max-w-xs"
         />
+        <p v-if="errors.prix" class="text-error text-sm italic">
+          {{ this.errors.prix[0] }}
+        </p>
       </div>
 
       <div class="form-control">
@@ -89,6 +110,9 @@
           false-value="0"
           class="checkbox"
         />
+        <p v-if="errors.charges_comprises" class="text-error text-sm italic">
+          {{ this.errors.charges_comprises[0] }}
+        </p>
       </div>
 
       <div class="form-control">
@@ -102,6 +126,9 @@
           false-value="0"
           class="checkbox"
         />
+        <p v-if="errors.meublé" class="text-error text-sm italic">
+          {{ this.errors.meublé[0] }}
+        </p>
       </div>
 
       <div>
@@ -114,6 +141,9 @@
           placeholder="Type here"
           class="input input-bordered w-full max-w-xs"
         />
+          <p v-if="errors.surface" class="text-error text-sm italic">
+          {{ this.errors.surface[0] }}
+        </p>
       </div>
 
       <div>
@@ -126,6 +156,9 @@
           placeholder="Type here"
           class="input input-bordered w-full max-w-xs"
         />
+        <p v-if="errors.nb_pieces" class="text-error text-sm italic">
+          {{ this.errors.nb_pieces[0] }}
+        </p>
       </div>
 
       <div>
@@ -139,8 +172,8 @@
           class="input input-bordered w-full max-w-xs"
         />
         <p v-if="errors.nb_chambres" class="text-error text-sm italic">
-            {{ this.errors.nb_chambres[0] }}
-          </p>
+          {{ this.errors.nb_chambres[0] }}
+        </p>
       </div>
 
       <div class="form-control">
@@ -154,6 +187,9 @@
           false-value="0"
           class="checkbox"
         />
+        <p v-if="errors.fibre_optique" class="text-error text-sm italic">
+          {{ this.errors.fibre_optique[0] }}
+        </p>
       </div>
 
       <div class="form-control">
@@ -167,6 +203,9 @@
           false-value="0"
           class="checkbox"
         />
+        <p v-if="errors.balcon" class="text-error text-sm italic">
+          {{ this.errors.balcon[0] }}
+        </p>
       </div>
 
       <div class="form-control">
@@ -180,6 +219,9 @@
           false-value="0"
           class="checkbox"
         />
+        <p v-if="errors.terrasse" class="text-error text-sm italic">
+          {{ this.errors.terrasse[0] }}
+        </p>
       </div>
 
       <div class="form-control">
@@ -193,6 +235,9 @@
           false-value="0"
           class="checkbox"
         />
+        <p v-if="errors.cave" class="text-error text-sm italic">
+          {{ this.errors.cave[0] }}
+        </p>
       </div>
 
       <div class="form-control">
@@ -206,6 +251,9 @@
           false-value="0"
           class="checkbox"
         />
+        <p v-if="errors.jardin" class="text-error text-sm italic">
+          {{ this.errors.jardin[0] }}
+        </p>
       </div>
 
       <div class="form-control">
@@ -219,6 +267,9 @@
           false-value="0"
           class="checkbox"
         />
+        <p v-if="errors.parking" class="text-error text-sm italic">
+          {{ this.errors.parking[0] }}
+        </p>
       </div>
 
       <div class="form-control">
@@ -232,6 +283,9 @@
           false-value="0"
           class="checkbox"
         />
+        <p v-if="errors.garage" class="text-error text-sm italic">
+          {{ this.errors.garage[0] }}
+        </p>
       </div>
 
       <div class="form-control">
@@ -245,6 +299,9 @@
           false-value="0"
           class="checkbox"
         />
+        <p v-if="errors.ascenseur" class="text-error text-sm italic">
+          {{ this.errors.ascenseur[0] }}
+        </p>
       </div>
 
       <select
@@ -283,12 +340,6 @@
         Crée une nouvelle annonce
       </button>
     </form>
-    <button
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-      @click.prevent="test"
-    >
-      test
-    </button>
   </div>
 </template>
 
@@ -313,10 +364,6 @@ export default {
     };
   },
   methods: {
-    async test() {
-      console.log(this.userdata);
-      console.log("errors : ".this.errors);
-    },
     async submit() {
       // assign url for cors error
       const queryText = this.$route.query.text ? "?text=" + this.$route.query.text : "";
@@ -327,7 +374,8 @@ export default {
         let response = await this.$axios
           .post(apiUrl, this.userdata)
           .then((res) => res.data);
-        console.log(response);
+
+        this.$router.push("/annonces/" + response.id);
       } catch (error) {
         console.log(error.response.data);
         this.errors = error.response.data.errors;

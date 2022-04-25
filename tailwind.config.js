@@ -9,8 +9,9 @@ module.exports = {
   plugins: [require("daisyui")],
 
   daisyui: {
+    themes: ["light", "dark", "bumblebee"],
     styled: true,
-    themes: false,
+    themes: true,
     base: true,
     utils: true,
     logs: true,

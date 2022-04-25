@@ -1,10 +1,9 @@
 <template>
   <div>
-    <div class=" w-4/5 mx-auto min-h-screen bg-base-100 my-4 p-6">
+    <div class="w-4/5 mx-auto min-h-screen bg-base-100 my-4 p-6">
       <div class="">
         <div class="mx-auto">
-          <AnnoncesFormAppartement />
-
+          <FormAppartement />
         </div>
       </div>
     </div>
@@ -12,6 +11,6 @@
 </template>
 <script>
 export default {
-    middleware: "auth",
+  middleware: "auth",
 };
 </script>

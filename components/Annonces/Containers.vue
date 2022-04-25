@@ -1,9 +1,17 @@
 <template>
   <div v-if="annonceProp" class="md:flex w-full">
     <img
+      v-if="annonceProp.photos"
       :src="annonceProp.photos.split(',')[0]"
       loading="lazy"
-      class="h-full w-full md:w-1/3 object-cover rounded-lg rounded-r-none pb-5/6"
+      class="h-full w-full md:w-1/3 object-cover rounded-lg rounded-r-none"
+      alt="image de l'annonce"
+    />
+    <img
+      v-else
+      src="https://via.placeholder.com/500"
+      loading="lazy"
+      class="h-full w-full md:w-1/3 object-cover rounded-lg rounded-r-none"
       alt="image de l'annonce"
     />
     <div
@@ -29,11 +37,9 @@
       </p>
 
       <div class="flex mt-auto">
-        <button class="bg-white text-red-500 px-4 py-2 rounded mr-auto hover:underline">
-          Delete
+        <button class="bg-blue-600 text-gray-200 px-2 py-2 ml-auto rounded-md">
+          Voir l'annonce
         </button>
-        <button class="bg-gray-200 text-blue-600 px-2 py-2 rounded-md mr-2">Edit</button>
-        <button class="bg-blue-600 text-gray-200 px-2 py-2 rounded-md">Publish</button>
       </div>
     </div>
   </div>

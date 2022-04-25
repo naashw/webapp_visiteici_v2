@@ -4,9 +4,9 @@
       <NuxtLink
         :to="`/annonces/${annonce.id}`"
         tag="a"
-        class="md:flex shadow-lg mx-6 md:container md:mx-auto my-4 max-w-lg md:max-w-6xl h-64 bg-base-100 rounded-lg"
+        class="md:flex shadow-lg mx-6 md:container md:mx-auto my-4 max-w-lg md:max-w-6xl h-96 bg-base-100 rounded-lg"
       >
-        <LazyAnnoncesHero v-if="annonce" :annonceProp="annonce" />
+        <LazyAnnoncesContainers v-if="annonce" :annonceProp="annonce" />
       </NuxtLink>
     </div>
   </div>
@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: 'LazyAnnoncesList',
   watch: {
     "$route.query": "$fetch",
   },

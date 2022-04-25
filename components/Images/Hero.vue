@@ -1,0 +1,31 @@
+<template>
+  <div >
+    <div class="grid grid-cols-2 gap-2">
+      <div>
+        <img v-if="imagesProps[0]" :src="imagesProps[0]" alt="" class="h-full w-full rounded-lg object-cover"  />
+        <img v-else src="https://via.placeholder.com/500" class="w-full rounded-lg" />
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <img v-if="imagesProps[1]" :src="imagesProps[1]" class="rounded-lg aspect-square object-cover" />
+        <img v-else src="https://via.placeholder.com/500" class="rounded-lg" />
+
+        <img v-if="imagesProps[2]" :src="imagesProps[2]" class="rounded-lg aspect-square object-cover" />
+        <img v-else src="https://via.placeholder.com/500" class="rounded-lg" />
+
+        <img v-if="imagesProps[3]" :src="imagesProps[3]" class="rounded-lg aspect-square object-cover" />
+        <img v-else src="https://via.placeholder.com/500" class="rounded-lg" />
+
+        <img v-if="imagesProps[4]" :src="imagesProps[4]" class="rounded-lg aspect-square object-cover" />
+        <img v-else src="https://via.placeholder.com/500" class="rounded-lg" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    imagesProps: Array,
+  },
+};
+</script>

@@ -30,7 +30,7 @@
         <div v-if="!this.$auth.loggedIn">
           <label for="my-modal-4" tabindex="0" class="btn btn-ghost btn-circle avatar">
             <div class="w-10 rounded-full">
-              <img src="https://api.lorem.space/image/face?hash=33791" />
+              <img src="https://via.placeholder.com/100" />
             </div>
           </label>
         </div>

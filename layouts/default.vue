@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <div class="h-screen flex flex-col bg-base-200">
+  <div data-theme="bumblebee" class="bg-base-200" > 
+    <div class="h-full min-h-screen flex flex-col bg-base-200">
       <NavBar/>
-      <Nuxt class="bg-base-200-"/>
+      <div class="w-3/5 mx-auto">
+      <Nuxt keep-alive class="bg-base-200"/>
+      </div>
     </div>
   </div>
 </template>
