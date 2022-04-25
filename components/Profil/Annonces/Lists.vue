@@ -21,7 +21,6 @@ export default {
   },
 
   async fetch() {
-
     const userId = "?userId=" + this.$auth.user.id;
     const apiUrl = "/api/annonces" + userId;
 

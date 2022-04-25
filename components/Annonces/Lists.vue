@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'LazyAnnoncesList',
+  name: "LazyAnnoncesList",
   watch: {
     "$route.query": "$fetch",
   },

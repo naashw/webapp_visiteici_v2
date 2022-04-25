@@ -1,4 +1,4 @@
-<template >
+<template>
   <div v-if="annonceProp" class="card card-compact bg-base-100 shadow-xl flex h-full">
     <div class="">
       <img
@@ -17,7 +17,9 @@
       />
     </div>
     <div class="card-body h-fit">
-      <h2 class="card-title text-base group-hover:text-secondary">{{ annonceProp.nom }}</h2>
+      <h2 class="card-title text-base group-hover:text-secondary">
+        {{ annonceProp.nom }}
+      </h2>
       <div class="mt-auto">
         <p class="text-xs">{{ annonceProp.ville }} {{ annonceProp.code_postal }}</p>
       </div>
