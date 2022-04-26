@@ -5,7 +5,12 @@
       Rédigez votre description, téléchargez quelques photos et touchez un maximum
       d'acheteurs et locataires
     </p>
-    <form class="" @submit.prevent="submit" autocomplete="on">
+    <form
+      class=""
+      @submit.prevent="submit"
+      autocomplete="on"
+      enctype="multipart/form-data"
+    >
       <select
         v-model="userdata.categories"
         class="select select-bordered w-full max-w-xs"
@@ -16,8 +21,13 @@
         <option value="2">Maison</option>
       </select>
       <p v-if="errors.categories" class="text-error text-sm italic">
-          {{ this.errors.categories[0] }}
-        </p>
+        {{ this.errors.categories[0] }}
+      </p>
+
+      <label class="label">
+        <span class="label-text">Photos de votre annonce</span>
+      </label>
+      <input type="file" id="file" ref="myFiles" @change="previewFiles" multiple />
 
       <label class="label">
         <span class="label-text">Titre de votre annonce</span>
@@ -29,8 +39,8 @@
         class="input input-bordered w-full max-w-xs"
       />
       <p v-if="errors.nom" class="text-error text-sm italic">
-          {{ this.errors.nom[0] }}
-        </p>
+        {{ this.errors.nom[0] }}
+      </p>
 
       <div class="form-control">
         <label class="label">
@@ -56,8 +66,8 @@
         class="input input-bordered w-full max-w-xs"
       />
       <p v-if="errors.code_postal" class="text-error text-sm italic">
-          {{ this.errors.code_postal[0] }}
-        </p>
+        {{ this.errors.code_postal[0] }}
+      </p>
 
       <label class="label">
         <span class="label-text">Ville</span>
@@ -69,8 +79,8 @@
         class="input input-bordered w-full max-w-xs"
       />
       <p v-if="errors.ville" class="text-error text-sm italic">
-          {{ this.errors.ville[0] }}
-        </p>
+        {{ this.errors.ville[0] }}
+      </p>
 
       <label class="label">
         <span class="label-text">Adresse</span>
@@ -82,8 +92,8 @@
         class="input input-bordered w-full max-w-xs"
       />
       <p v-if="errors.adresse" class="text-error text-sm italic">
-          {{ this.errors.adresse[0] }}
-        </p>
+        {{ this.errors.adresse[0] }}
+      </p>
       <div>
         <label class="label">
           <span class="label-text">Prix</span>
@@ -141,7 +151,7 @@
           placeholder="Type here"
           class="input input-bordered w-full max-w-xs"
         />
-          <p v-if="errors.surface" class="text-error text-sm italic">
+        <p v-if="errors.surface" class="text-error text-sm italic">
           {{ this.errors.surface[0] }}
         </p>
       </div>
@@ -359,11 +369,17 @@ export default {
         parking: 0,
         garage: 0,
         ascenseur: 0,
+        photos: [],
       },
       errors: {},
     };
   },
   methods: {
+    previewFiles() {
+      this.userdata.photos = this.$refs.myFiles.files;
+      console.log(this.userdata);
+    },
+
     async submit() {
       // assign url for cors error
       const queryText = this.$route.query.text ? "?text=" + this.$route.query.text : "";

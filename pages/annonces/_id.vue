@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div v-if="annonce">
 
     <div class="">
       <div class="grid grid-cols-3 gap-3 my-2">
         <div class="col-span-2">
-          <ImagesHero :imagesProps="annonce.photos" />
+          <ImagesHero v-if="annonce.photos" :imagesProps="annonce.photos" />
 
           <h1 class="capitalize text-2xl">{{ annonce.nom }}</h1>
 
@@ -67,8 +67,9 @@
 </template>
 <script>
 export default {
-  async asyncData({ params, $axios }) {
-    // fetch annonces in api url with axios
+  async asyncData({ redirect, params, $axios, error }) {
+    try {
+      
     const annonce = await $axios
       .get(`/api/annonces/${params.id}`)
       .then((res) => res.data[0]);
@@ -80,6 +81,10 @@ export default {
       .then((res) => res.data); 
 
     return { annonce, user };
+    } catch (error) {
+      
+      redirect('/annonces/');
+    }
   },
 };
 </script>
