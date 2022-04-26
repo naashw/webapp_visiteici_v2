@@ -33,11 +33,10 @@
               <img src="https://via.placeholder.com/100" />
             </div>
           </label>
+          <LoginModal />
         </div>
       </div>
     </div>
-
-    <LoginModal />
   </div>
 </template>
 

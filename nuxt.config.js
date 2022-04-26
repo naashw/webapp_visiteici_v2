@@ -69,6 +69,7 @@ export default {
           login: { url: '/login', method: 'post', },
           logout: { url: '/logout', method: 'post', },
           user: { url: '/api/user', method: 'get', propertyName: 'user' },
+          register: {url:'/register', method: 'post'},
         }
       },
     }
