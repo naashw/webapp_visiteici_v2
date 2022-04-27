@@ -27,7 +27,7 @@
       <label class="label">
         <span class="label-text">Photos de votre annonce</span>
       </label>
-      <input type="file" id="file" ref="myFiles" @change="previewFiles" multiple />
+      <input type="file" name="photos[]" id="file" ref="myFiles" @change="previewFiles" multiple />
 
       <label class="label">
         <span class="label-text">Titre de votre annonce</span>
@@ -369,15 +369,16 @@ export default {
         parking: 0,
         garage: 0,
         ascenseur: 0,
-        photos: [],
+
       },
+      photos: [],
+
       errors: {},
     };
   },
   methods: {
     previewFiles() {
-      this.userdata.photos = this.$refs.myFiles.files;
-      console.log(this.userdata);
+      this.photos = this.$refs.myFiles.files;
     },
 
     async submit() {
@@ -385,13 +386,29 @@ export default {
       const queryText = this.$route.query.text ? "?text=" + this.$route.query.text : "";
       const apiUrl = "/api/appartements" + queryText;
 
+      let formData = new FormData();
+
+      for (let i = 0; i < this.photos.length; i++) {
+        formData.append('photos[]', this.photos[i]);
+    }
+
+      for (const data in this.userdata) {
+        formData.append(data, this.userdata[data]);
+      }
+
       // fetch annonces in api url with axios
       try {
-        let response = await this.$axios
-          .post(apiUrl, this.userdata)
-          .then((res) => res.data);
+        const response = await this.$axios({
+          method: "post",
+          url: apiUrl,
+          data: formData,
+          headers:{
+            'Content-Type': 'multipart/form-data'
+          },
+ 
+        }).then((res) => res.data);
 
-        this.$router.push("/annonces/" + response.id);
+        //this.$router.push("/annonces/" + response.id);
       } catch (error) {
         console.log(error.response.data);
         this.errors = error.response.data.errors;
