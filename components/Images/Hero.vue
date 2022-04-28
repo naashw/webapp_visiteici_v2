@@ -6,7 +6,7 @@
           v-if="imagesProps[0]"
           :src="imagesProps[0]"
           alt=""
-          class="h-full w-full rounded-lg object-cover"
+          class="h-full w-full aspect-square rounded-lg object-cover"
         />
         <img v-else src="https://via.placeholder.com/500" class="w-full rounded-lg" />
       </div>
@@ -14,7 +14,7 @@
         <img
           v-if="imagesProps[1]"
           :src="imagesProps[1]"
-          class="rounded-lg aspect-square object-cover"
+          class="rounded-lg aspect-square object-fill"
         />
         <img v-else src="https://via.placeholder.com/500" class="rounded-lg" />
 

@@ -27,7 +27,30 @@
       <label class="label">
         <span class="label-text">Photos de votre annonce</span>
       </label>
-      <input type="file" name="photos[]" id="file" ref="myFiles" @change="previewFiles" multiple />
+      <input
+        type="file"
+        name="photos"
+        id="file"
+        ref="myFiles"
+        @change="previewFiles"
+        multiple
+      />
+
+      <p v-if="errors.photos" class="text-error text-sm italic">
+        {{ this.errors.photos[0] }}
+      </p>
+
+      <div v-for="(n, i) in this.photos.length">
+        <p>
+          {{ photos[i] ? photos[i].name : "" }}
+          <span
+            v-if="typeof errors['photos.' + i] !== undefined && errors['photos.' + i]"
+            class="text-error text-sm italic"
+          >
+            : {{ errors["photos." + i][0] }}
+          </span>
+        </p>
+      </div>
 
       <label class="label">
         <span class="label-text">Titre de votre annonce</span>
@@ -369,7 +392,6 @@ export default {
         parking: 0,
         garage: 0,
         ascenseur: 0,
-
       },
       photos: [],
 
@@ -389,8 +411,8 @@ export default {
       let formData = new FormData();
 
       for (let i = 0; i < this.photos.length; i++) {
-        formData.append('photos[]', this.photos[i]);
-    }
+        formData.append("photos[]", this.photos[i]);
+      }
 
       for (const data in this.userdata) {
         formData.append(data, this.userdata[data]);
@@ -402,11 +424,14 @@ export default {
           method: "post",
           url: apiUrl,
           data: formData,
-          headers:{
-            'Content-Type': 'multipart/form-data'
+          headers: {
+            "Content-Type": "multipart/form-data",
           },
- 
-        }).then((res) => res.data);
+        })
+          .then((res) => res.data)
+          .catch((err) => {
+            this.errors = err.response.data.errors;
+          });
 
         //this.$router.push("/annonces/" + response.id);
       } catch (error) {
