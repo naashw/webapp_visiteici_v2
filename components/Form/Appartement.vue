@@ -59,6 +59,7 @@
         v-model="userdata.nom"
         type="text"
         placeholder="Type here"
+        id="nom"
         class="input input-bordered w-full max-w-xs"
       />
       <p v-if="errors.nom" class="text-error text-sm italic">
@@ -71,6 +72,7 @@
         </label>
         <textarea
           v-model="userdata.description"
+          id="description"
           class="textarea textarea-bordered h-24"
           placeholder="Bio"
         ></textarea>
@@ -86,6 +88,7 @@
         v-model="userdata.code_postal"
         type="text"
         placeholder="Type here"
+        id="code_postal"
         class="input input-bordered w-full max-w-xs"
       />
       <p v-if="errors.code_postal" class="text-error text-sm italic">
@@ -99,6 +102,7 @@
         v-model="userdata.ville"
         type="text"
         placeholder="Type here"
+        id="ville"
         class="input input-bordered w-full max-w-xs"
       />
       <p v-if="errors.ville" class="text-error text-sm italic">
@@ -112,6 +116,7 @@
         v-model="userdata.adresse"
         type="text"
         placeholder="Type here"
+        id="adresse"
         class="input input-bordered w-full max-w-xs"
       />
       <p v-if="errors.adresse" class="text-error text-sm italic">
@@ -125,6 +130,7 @@
           v-model="userdata.prix"
           type="text"
           placeholder="Type here"
+          id="prix"
           class="input input-bordered w-full max-w-xs"
         />
         <p v-if="errors.prix" class="text-error text-sm italic">
@@ -141,6 +147,7 @@
           type="checkbox"
           true-value="1"
           false-value="0"
+          id="charges_comprises"
           class="checkbox"
         />
         <p v-if="errors.charges_comprises" class="text-error text-sm italic">
@@ -157,6 +164,7 @@
           type="checkbox"
           true-value="1"
           false-value="0"
+          id="meublé"
           class="checkbox"
         />
         <p v-if="errors.meublé" class="text-error text-sm italic">
@@ -172,6 +180,7 @@
           v-model="userdata.surface"
           type="text"
           placeholder="Type here"
+          id="surface"
           class="input input-bordered w-full max-w-xs"
         />
         <p v-if="errors.surface" class="text-error text-sm italic">
@@ -187,6 +196,7 @@
           v-model="userdata.nb_pieces"
           type="text"
           placeholder="Type here"
+          id="nb_pieces"
           class="input input-bordered w-full max-w-xs"
         />
         <p v-if="errors.nb_pieces" class="text-error text-sm italic">
@@ -202,6 +212,7 @@
           v-model="userdata.nb_chambres"
           type="text"
           placeholder="Type here"
+          id="nb_chambres"
           class="input input-bordered w-full max-w-xs"
         />
         <p v-if="errors.nb_chambres" class="text-error text-sm italic">
@@ -218,6 +229,7 @@
           type="checkbox"
           true-value="1"
           false-value="0"
+          id="fibre_optique"
           class="checkbox"
         />
         <p v-if="errors.fibre_optique" class="text-error text-sm italic">
@@ -234,6 +246,7 @@
           type="checkbox"
           true-value="1"
           false-value="0"
+          id="balcon"
           class="checkbox"
         />
         <p v-if="errors.balcon" class="text-error text-sm italic">
@@ -338,9 +351,10 @@
       </div>
 
       <select
-        v-model="userdata.classe_energie"
-        class="select select-bordered w-full max-w-xs"
         key="classe_energie"
+        id="classe_energie"
+        class="select select-bordered w-full max-w-xs"
+        v-model="userdata.classe_energie"
       >
         <option disabled selected>Classe énergétique</option>
         <option value="1">A</option>
@@ -353,8 +367,9 @@
       </select>
       <select
         key="GES"
-        v-model="userdata.GES"
+        id="GES"
         class="select select-bordered w-full max-w-xs"
+        v-model="userdata.GES"
       >
         <option disabled selected>GES</option>
         <option value="1">A</option>
