@@ -448,7 +448,7 @@ export default {
             this.errors = err.response.data.errors;
           });
 
-        //this.$router.push("/annonces/" + response.id);
+        this.$router.push("/annonces/" + response.id);
       } catch (error) {
         console.log(error.response.data);
         this.errors = error.response.data.errors;

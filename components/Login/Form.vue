@@ -77,6 +77,8 @@ export default {
           let response = await this.$auth.loginWith("laravelSanctum", {
             data: this.login,
           });
+
+          this.$router.push("/profil");
         } catch (err) {
           this.errors = {
             message: err.response.data.message,

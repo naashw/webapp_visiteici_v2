@@ -51,6 +51,10 @@ export default {
     // middleware: ['auth']
   },
 
+  redirect: {
+    login: "/",
+  },
+
   //Strategies d'authentification à laravelSactum
   auth: {
     strategies: {

@@ -3,7 +3,9 @@
     <div class="flex gap-2 mx-auto mt-4">
       <div class="md:w-1/3 sm:w-full">
         <p v-if="$fetchState.pending">Récupération du profil</p>
-        <p v-else-if="$fetchState.error">Une erreur est apparu</p>
+        <p v-else-if="$fetchState.error">
+          Une erreur est apparu dans la récupération du profil
+        </p>
         <div v-else>
           <ProfilCard :user="publicUser" />
         </div>

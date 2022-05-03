@@ -45,7 +45,7 @@ export default {
 
   data() {
     return {
-      inputText: this.$route.query.text || "",
+      inputText: this.$route.query.text  || "",
     };
   },
 };
