@@ -30,7 +30,7 @@
           >{{ user.url_website_societe_public }}</a
         >
 
-        <div class="card-actions" v-if="this.$auth.user.id == user.user_id">
+        <div class="card-actions" v-if="this.$auth.loggedIn && this.$auth.user.id == user.user_id">
           <button @click.prevent="changeVisibilityUserForm" class="btn btn-primary">
             Modifier mon profil public
           </button>
