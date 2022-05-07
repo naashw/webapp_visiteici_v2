@@ -73,6 +73,9 @@
           >
             Crée un compte
           </button>
+           <p v-if="errors.message" class="text-center text-error text-sm italic">
+          {{ this.errors.message }}
+        </p>
         </div>
       </form>
       <p class="text-center text-gray-500 text-xs">
@@ -116,8 +119,11 @@ export default {
 
         this.$router.push("/profil");
       } catch (err) {
-        this.errors = err.response.data.errors;
-        console.log(err.response.data);
+         if (err.response === undefined) {
+          this.errors.message = "Erreur de connexion au serveur";
+        } else {
+          this.errors = err.response.data.errors;
+        }
       }
     },
   },

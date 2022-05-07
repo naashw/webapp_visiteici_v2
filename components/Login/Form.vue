@@ -48,7 +48,11 @@
             Mot de passe oublié ?
           </a>
         </div>
+        <p v-if="errors.message" class="text-center text-error text-sm italic">
+          {{ this.errors.message }}
+        </p>
       </form>
+
       <p class="text-center text-gray-500 text-xs">
         &copy;2022 Visite'ici. Tout droit réservé.
       </p>
@@ -72,19 +76,19 @@ export default {
   },
   methods: {
     async userLogin() {
-      if (!this.$auth.loggedIn) {
-        try {
-          let response = await this.$auth.loginWith("laravelSanctum", {
+      try {
+        let response = await this.$auth
+          .loginWith("laravelSanctum", {
             data: this.login,
-          });
+          })
+          .then((res) => res.data);
 
-          this.$router.push("/profil");
-        } catch (err) {
-          this.errors = {
-            message: err.response.data.message,
-            email: err.response.data.errors.email,
-            password: err.response.data.errors.password,
-          };
+        this.$router.push("/profil");
+      } catch (err) {
+        if (err.response === undefined) {
+          this.errors.message = "Erreur de connexion au serveur";
+        } else {
+          this.errors = err.response.data.errors;
         }
       }
     },

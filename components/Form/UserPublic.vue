@@ -1,5 +1,5 @@
 <template>
-  <div class="" v-if="user">
+  <div class="" v-if="userData">
     <div class="card h-fit w-96 bg-base-100 shadow-xl mx-auto">
       <figure class="px-10 pt-10 avatar">
         <div class="w-24 rounded-full">
@@ -7,17 +7,70 @@
         </div>
       </figure>
       <div class="card-body items-center text-center">
-        <h2 v-if="user.name_public" class="card-title">{{ user.name_public }}</h2>
-        <input
-          class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-          type=""
-          name=""
-          :placeholder="user.name_public"
-          v-model="userPublic.name_public"
+        <FormInputText
+          title="Nom publique"
+          :placeholderInput="userData.name_public"
+          @input="
+            (input) => {
+              userData.name_public = input;
+            }
+          "
+          :error="errors.name_public"
         />
+        <FormInputText
+          title="Adresse email publique"
+          :placeholderInput="userData.email_public"
+          @input="
+            (input) => {
+              userData.email_public = input;
+            }
+          "
+          :error="errors.email_public"
+        />
+        <FormInputText
+          title="Numéro de télephone publique"
+          :placeholderInput="userData.telephone_public"
+          @input="
+            (input) => {
+              userData.telephone_public = input;
+            }
+          "
+          :error="errors.telephone_public"
+        />
+        <FormInputText
+          title="ville_public"
+          :placeholderInput="userData.ville_public"
+          @input="
+            (input) => {
+              userData.ville_public = input;
+            }
+          "
+          :error="errors.ville_public"
+        />
+        <FormInputText
+          title="nom_societe_public"
+          :placeholderInput="userData.nom_societe_public"
+          @input="
+            (input) => {
+              userData.nom_societe_public = input;
+            }
+          "
+          :error="errors.nom_societe_public"
+        />
+        <FormInputText
+          title="url_website_societe_public"
+          :placeholderInput="userData.url_website_societe_public"
+          @input="
+            (input) => {
+              userData.url_website_societe_public = input;
+            }
+          "
+          :error="errors.url_website_societe_public"
+        />
+
         <p>If a dog chews shoes whose shoes does he choose?</p>
         <div class="card-actions">
-          <button @click.prevent="SaveUserPublic" class="btn btn-primary">
+          <button @click.prevent="SaveUserData" class="btn btn-primary">
             Sauvegarder mon profil public
           </button>
         </div>
@@ -30,19 +83,15 @@
 <script>
 export default {
   props: {
-    user: Object,
+    user: {
+      type: Object,
+      required: true,
+    },
   },
 
   data() {
     return {
-      userPublic: {
-        name_public: undefined,
-        email_public: undefined,
-        telephone_public: undefined,
-        ville_public: undefined,
-        nom_societe_public: undefined,
-        url_website_societe_public: undefined,
-      },
+      userData: this.user,
       errors: {
         name_public: undefined,
         email_public: undefined,
@@ -54,12 +103,12 @@ export default {
     };
   },
   methods: {
-    SaveUserPublic() {
+    SaveUserData() {
       this.$axios
-        .post("/api/userPublic", this.userPublic)
+        .post("/api/userPublic", this.userData)
         .then((response) => {
-          this.userPublic = response.data.user;
-          this.$emit("changeVisibilityUserForm", this.userPublic);
+          this.userData = response.data.user;
+          this.$emit("changeVisibilityUserForm", this.userData);
         })
         .catch((error) => {
           this.errors = error.response.data.errors;

@@ -78,7 +78,7 @@ export default {
 
       const user = await $axios
       .get(`/api/userPublic/${annonce.user_id}`)
-      .then((res) => res.data); 
+      .then((res) => res.data.user); 
 
     return { annonce, user };
     } catch (error) {

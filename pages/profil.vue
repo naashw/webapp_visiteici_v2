@@ -7,7 +7,7 @@
           Une erreur est apparu dans la récupération du profil
         </p>
         <div v-else>
-          <ProfilCard :user="publicUser" />
+          <ProfilCard :user="user" />
         </div>
       </div>
       <div class="md:w-2/3 sm:w-full">
@@ -28,7 +28,7 @@ export default {
 
   data() {
     return {
-      publicUser: {},
+      user: undefined,
     };
   },
   async fetch() {
@@ -37,9 +37,8 @@ export default {
 
     // fetch annonces in api url with axio
     const res = await this.$axios.get(userPublicApi).then((res) => res.data);
-    Object.keys(res).length !== 0
-      ? (this.publicUser = res)
-      : (this.publicUser.name_public = this.$auth.user.name);
+    console.log(res);
+    res.finded ? (this.user = res.user): (this.user.name_public = this.$auth.user.name);
   },
 
   fetchOnServer: true,
