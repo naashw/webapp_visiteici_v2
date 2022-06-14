@@ -1,8 +1,8 @@
 <template>
   <div v-if="annonceProp" class="md:flex w-full">
     <img
-      v-if="annonceProp.photos"
-      :src="annonceProp.photos.split(',')[0]"
+      v-if="annonceProp.photos[0]"
+      :src="annonceProp.photos[0].url"
       loading="lazy"
       class="h-full w-full md:w-1/3 object-cover rounded-lg rounded-r-none"
       alt="image de l'annonce"
@@ -19,18 +19,21 @@
     >
       <div class="flex">
         <h2 class="text-xl text-gray-800 font-medium mr-6">
-          {{ annonceProp.prix.split(".")[0] }} €
+          {{ annonceProp.appartement.prix }} €
         </h2>
         <p class="text-gray-800 font-semibold tracking-tighter">
-          {{ annonceProp.nom }}
+          {{ annonceProp.appartement.nom }}
         </p>
       </div>
       <p class="text-sm text-gray-500 mt-1 italic">
-        {{ annonceProp.nb_chambres }} chambres - {{ annonceProp.surface }}m²
+        {{ annonceProp.appartement.nb_chambres }} chambres -
+        {{ annonceProp.surface }}m²
       </p>
       <p class="text-sm text-gray-500 italic">
-        {{ annonceProp.ville }}
-        <span class="font-medium">{{ annonceProp.code_postal }}</span>
+        {{ annonceProp.appartement.ville }}
+        <span class="font-medium">{{
+          annonceProp.appartement.code_postal
+        }}</span>
       </p>
       <p class="text-sm text-gray-700 mt-3">
         lorem ipsum dolor sit amet consectetur adipisicing elit.

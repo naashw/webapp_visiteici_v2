@@ -43,9 +43,8 @@ export default {
     '@nuxtjs/auth-next',
 
     '@nuxt/http',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
   ],
-
   //middleware d'authentification à activer pour mettre l'authentification sur toutes les pages par defaut
   router: {
     // middleware: ['auth']
@@ -73,7 +72,7 @@ export default {
           login: { url: '/login', method: 'post', },
           logout: { url: '/logout', method: 'post', },
           user: { url: '/api/user', method: 'get', propertyName: 'user' },
-          register: {url:'/register', method: 'post'},
+          register: { url: '/register', method: 'post' },
         }
       },
     }
