@@ -93,6 +93,8 @@ export default {
    ** Runtime Config
    */
   publicRuntimeConfig: {
+    API_URL: process.env.API_URL,
+    uploadVirtualTourUrl: process.env.API_URL + "/api/virtualTour",
     http: {
       browserBaseURL: process.env.API_URL,
     },

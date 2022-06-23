@@ -1,17 +1,18 @@
 <template>
-  <div class="h-full w-full">
+  <div class="h-full w-full" v-if="virtualTour">
     <button class="buttonHotSpot" @click="addHotSpot()">
       Ajouter un hotspot
     </button>
 
     <pano-viewer
+      v-if="this.currentRoom"
       id="Visiteici-viewer360"
       class="viewer"
-      :data-room="currentRoom.name"
+      :data-room="this.currentRoom.name"
       ref="pano"
       rel="preload"
       :tag="'div'"
-      :image="currentRoom.image"
+      :image="this.currentRoom.image"
       @view-change="
         (e) => {
           setHotspotOffsets();
@@ -19,6 +20,7 @@
       "
     >
       <div
+        v-if="this.hotspots.length > 0"
         v-for="(hotspot, index) in this.hotspots"
         :key="index"
         class="hotspot link"
@@ -26,7 +28,7 @@
         :data-target-room="hotspot.target_room"
         :data-yaw="hotspot.yaw"
         :data-pitch="hotspot.pitch"
-        v-show="hotspot.room === currentRoom.name"
+        v-show="hotspot.room === virtualTour.virtualroom[0].name"
         @click="
           (e) => {
             load(hotspot);
@@ -46,7 +48,7 @@
       >
         <input type="checkbox" class="peer z-20" v-model="IsCollapseVisible" />
         <div
-          class="w-1/6 absolute left-1/2 transform -translate-x-1/2 collapse-title bg-neutral/80 peer-checked:bg-neutral/70 text-base-100 rounded-t-lg"
+          class="w-48 absolute left-1/2 transform -translate-x-1/2 collapse-title bg-neutral/80 peer-checked:bg-neutral/70 text-base-100 rounded-t-lg"
         >
           <div class="absolute left-1/2 transform -translate-x-1/2">
             <svg
@@ -84,11 +86,12 @@
         </div>
         <div
           class="w-screen collapse-content text-base-100 bg-neutral/80 peer-checked:bg-neutral/70 overflow-x-auto"
+          v-if="virtualTour"
         >
           <div class="flex flex-nowrap justify-center gap-4 pt-4">
             <div
-              v-for="(virtualRoom, index) in this.virtualRooms"
-              class="w-1/6 shrink-0 z-10"
+              v-for="(virtualRoom, index) in virtualTour.virtual_room"
+              class="w-48 shrink-0 z-10"
             >
               <div
                 class="card bg-base-100 shadow-xl image-full"
@@ -124,7 +127,7 @@ export default {
   layout: "virtualTour",
 
   props: {
-    VirtualTour: Object,
+    virtualTour: Object,
   },
 
   components: {
@@ -133,7 +136,6 @@ export default {
 
   mounted() {
     this.setHotspotOffsets();
-    this.initData();
   },
 
   watch: {
@@ -146,33 +148,16 @@ export default {
       },
       deep: true,
     },
+    virtualTour: {
+      handler: function () {
+        this.initVirtualTour();
+      },
+    },
   },
-
-  async fetch() {
-    const ref = this;
-    const virtualTour = await this.$axios
-      .get("http://127.0.0.1:8000/api/virtualTour/1")
-      .then((res) => res.data);
-    virtualTour.virtualroom.forEach((virtualroom) => {
-      this.virtualRooms.push(virtualroom);
-
-      virtualroom.virtual_hotspot.forEach((hotspot) => {
-        this.hotspots.push({
-          room: hotspot.room,
-          target_room: hotspot.target_room,
-          yaw: hotspot.yaw,
-          pitch: hotspot.pitch,
-        });
-      });
-    });
-  },
-  fetchOnServer: true,
 
   data() {
     return {
       IsCollapseVisible: 0,
-      myFiles: [],
-      virtualTour: [],
       virtualRooms: [],
       hotspots: [],
       currentRoom: {
@@ -183,6 +168,22 @@ export default {
   },
 
   methods: {
+    async initVirtualTour() {
+      this.$props.virtualTour.virtual_room.forEach((virtualroom) => {
+        this.virtualRooms.push(virtualroom);
+
+        virtualroom.virtual_hotspot.forEach((hotspot) => {
+          this.hotspots.push({
+            room: hotspot.room,
+            target_room: hotspot.target_room,
+            yaw: hotspot.yaw,
+            pitch: hotspot.pitch,
+          });
+        });
+      });
+
+      this.initData(this.$props.virtualTour);
+    },
     handleFilePondInit: function () {
       console.log("FilePond has initialized");
 
@@ -191,11 +192,11 @@ export default {
     changeRoom(newRoom) {
       this.currentRoom = newRoom;
     },
-    initData() {
+    initData(virtualTour) {
       this.container = document.querySelector(".view360-canvas");
       this.viewerParent = document.querySelector(".viewer");
       this.LoadingChangeRoom = false;
-      this.currentRoom = structuredClone(this.virtualRooms[0]);
+      this.currentRoom = structuredClone(virtualTour.virtual_room[0]);
     },
     addHotSpot() {
       const ref = this;
@@ -323,8 +324,8 @@ export default {
     },
     load(hotspot) {
       const ref = this;
-      let Targetvirtualroom = ref.virtualRooms.find(
-        (virtualroom) => virtualroom.name === hotspot.target_room
+      let Targetvirtualroom = this.$props.virtualTour.virtual_room.find(
+        (virtualroom) => room.name === hotspot.target_room
       );
 
       if (ref.currentRoom.name === hotspot.target_room) {
@@ -387,10 +388,10 @@ export default {
 }
 
 .buttonHotSpot {
-  background-color: #ff0000;
+  background-color: #fff;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 10%;
+  left: 10%;
   display: block;
   z-index: 3;
 }
